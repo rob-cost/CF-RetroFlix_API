@@ -1,0 +1,12 @@
+URL: /
+Timestamp: Tue May 06 2025 18:39:15 GMT+0200 (Central European Summer Time)
+
+URL: /favicon.ico
+Timestamp: Tue May 06 2025 18:39:15 GMT+0200 (Central European Summer Time)
+
+URL: /documentation
+Timestamp: Tue May 06 2025 18:39:20 GMT+0200 (Central European Summer Time)
+
+URL: /favicon.ico
+Timestamp: Tue May 06 2025 18:39:20 GMT+0200 (Central European Summer Time)
+
