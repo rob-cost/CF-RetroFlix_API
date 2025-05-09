@@ -1,20 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>REST API</title>
-</head>
-<body>
-	<h1> myFlix API Documentation </h1>
-	<h2> Information </h2>
-		 	<p> The myFlix API is the server component of a full-stack Java-Script web application
-				that provides access to a movie database.
-				Built with the MERN stack (MongoDB, Express, React, Node.js), this API stores informations of different movies and users preferences of this movies.
-				The REST API will be accesed using common HTTP methods like GET and POST while (CRUD) will be used to retrieve data from the database and store that data 
-				in a non-relational way.
 
-			</p>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>REST API</title>
+	</head>
+
+	<body>
+		<h1> myFlixVintage Movie API Documentation </h1>
+		<h2> Information </h2>
+		<p> The myFlix API is the server component of a full-stack Java-Script web application
+			that provides access to a vintage-movie database.
+			Built with the MERN stack (MongoDB, Express, React, Node.js), this API stores informations of different
+			movies and users preferences of this movies.
+			The REST API will be accesed using common HTTP methods like GET and POST while (CRUD) will be used to
+			retrieve data from the database and store that data
+			in a non-relational way.
+		</p>
+
+		<h1>API Endpoints</h1>
+		<br>
+
+		<h2>Movie related API Endpoints</h2>
+		<br>
+
+		<h3>1. Get all the movies</h3>
+
+		<p>
+			<b>Url:</b> <code>/movies</code>
+		</p>
+		<p>
+			<b>Method:</b> GET
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A JSON object holding a list of all movies
+		</p>
+
+
+		<br>
+
+		<h3> 2. Get movie by title </h3>
+
+		<p>
+			<b>Url:</b> /movies/:title
+		</p>
+		<p>
+			<b>Method:</b> GET
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A JSON object holding title, genre, director, actors, rate, image of the movie
+		</p>
+
+
+		<br>
+
+		<h3> 3. Get genre by description </h3>
+
+		<p>
+			<b>Url:</b> /genres/:name
+		</p>
+		<p>
+			<b>Method:</b> GET
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A text message indicating the description of the genre
+		</p>
+
+
+		<br>
+
+		<h3> 4. Get infos about a director </h3>
+
+		<p>
+			<b>Url:</b> /directors/:name
+		</p>
+		<p>
+			<b>Method:</b> GET
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A JSON object containing bio, birth-date and death-year of a director
+		</p>
+
+
+		<br>
+
+		<h3> 5. Get infos about a director </h3>
+
+		<p>
+			<b>Url:</b> /actors/:name
+		</p>
+		<p>
+			<b>Method:</b> GET
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A JSON object containing bio of an actor
+
+		</p>
+		<br>
+
+
+		<h2>User related API Endpoints</h2>
+		<br>
+
+		<h3> 6. Register a new user </h3>
+
+		<p>
+			<b>Url:</b> /users
+		</p>
+		<p>
+			<b>Method:</b> POST
+		</p>
+		<p>
+			<b>Request data:</b> A JSON object containing user's details
+		</p>
+		<p>
+			<b>Response data:</b> A response indicating if the user has been added or not
+
+		</p>
+		<br>
+
+		<h3> 7. Update user info </h3>
+
+		<p>
+			<b>Url:</b> /users/:username/:name
+		</p>
+		<p>
+			<b>Method:</b> PUT
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A response indicating if the user has been added or not
+
+		</p>
+		<br>
+
+		<h3> 8. Delete user </h3>
+
+		<p>
+			<b>Url:</b> /users/:username
+		</p>
+		<p>
+			<b>Method:</b> DELETE
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A response indicating that user has been deleted 
+
+		</p>
+		<br>
+
+		<h3> 9. Add movie to favorites list </h3>
+
+		<p>
+			<b>Url:</b> /users/:username/favorites/:movieId
+		</p>
+		<p>
+			<b>Method:</b> POST
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A response that the movie has been added 
+
+		</p>
+		<br>
+
+		<h3> 10. Remove movie from favorites list </h3>
+
+		<p>
+			<b>Url:</b> /users/:username/favorites/:movieId
+		</p>
+		<p>
+			<b>Method:</b> DELETE
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A response that the movie has been removed
+
+		</p>
+		<br>
+
+
+		<h3> 11. Add movie to To Watch list </h3>
+
+		<p>
+			<b>Url:</b> /users/:username/towatch/:movieId
+		</p>
+		<p>
+			<b>Method:</b> POST
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A response that the movie has been added 
+
+		</p>
+		<br>
+
+
+		<h3> 12. Remove movie from favorites list </h3>
+
+		<p>
+			<b>Url:</b> /users/:username/towatch/:movieId
+		</p>
+		<p>
+			<b>Method:</b> DELETE
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A response that the movie has been removed
+
+		</p>
+		<br>
+
+
+	</body>
+
 </html>
-
