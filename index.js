@@ -17,44 +17,48 @@ let movies = [
         title: "2001: A Space Odyssey",
         genre: "Science Fiction",
         description: "A mind-bending journey through space and human evolution, driven by a mysterious monolith and an AI named HAL.",
-        "release-date": "1968-04-02",
+        releaseDate: "1968-04-02",
         rating: 8.3,
-        "main actors": ["Keir Dullea", "Gary Lockwood", "William Sylvester"]
+        mainActors: ["Keir Dullea", "Gary Lockwood", "William Sylvester"],
+        director: "Stanley Kubrick"
       },
       {
         title: "Star Wars: Episode IV – A New Hope",
         genre: "Science Fiction / Space Opera",
         description: "A young farm boy joins forces with rebels to fight against an oppressive galactic empire led by Darth Vader.",
-        "release-date": "1977-05-25",
+        releaseDate: "1977-05-25",
         rating: 8.6,
-        "main actors": ["Mark Hamill", "Harrison Ford", "Carrie Fisher"]
+        mainActors: ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
+        director: "George Lucas"
       },
       {
         title: "Blade Runner",
         genre: "Science Fiction / Neo-noir",
         description: "In a dystopian future, a blade runner is tasked with hunting down bioengineered beings known as replicants.",
-        "release-date": "1982-06-25",
+        releaseDate: "1982-06-25",
         rating: 8.1,
-        "main actors": ["Harrison Ford", "Rutger Hauer", "Sean Young"]
+        mainActors: ["Harrison Ford", "Rutger Hauer", "Sean Young"],
+        director: "Ridley Scott"
       },
       {
         title: "The Thing",
         genre: "Science Fiction / Horror",
         description: "A research team in Antarctica encounters a shape-shifting alien that can perfectly mimic any organism.",
-        "release-date": "1982-06-25",
+        releaseDate: "1982-06-25",
         rating: 8.2,
-        "main actors": ["Kurt Russell", "Wilford Brimley", "Keith David"]
+        mainActors: ["Kurt Russell", "Wilford Brimley", "Keith David"],
+        director: "John Carpenter"
       },
       {
         title: "The Matrix",
         genre: "Science Fiction / Action",
         description: "A computer hacker discovers the world he lives in is a simulated reality and joins a rebellion to free humanity.",
-        "release-date": "1999-03-31",
+        releaseDate: "1999-03-31",
         rating: 8.7,
-        "main actors": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"]
-      }
-
-];
+        mainActors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+        director: "Lana and Lilly Wachowski"
+      },
+    ];
 
 // === MOVIE ROUTES ===
 
@@ -71,20 +75,21 @@ app.get('/movies/:title', (req, res) => {
 
 // GET genre description
 app.get('/genres/:name', (req, res) => {
-    res.send(genres.find((genres) => {
-        return genres.name === req.params.name}))
+    res.send(`GET request: Description of the genre "${req.params.name}"`)
+   /*  res.send(genres.find((genres) => {
+        return genres.name === req.params.name})) */
 });
 
 // GET infos about a director
 app.get('/directors/:name', (req, res) => {
-    res.send(`GET request: Infos about director ${req.params.name}`)
+    res.send(`GET request: Infos about director "${req.params.name}"`)
     /* res.json(directors.find((directors) => {
         return directors.name === req.params.name })) */
 });
 
 // GET infos about an actor
 app.get('/actors/:name', (req, res) => {
-    res.send(`GET request: Infos about actor ${req.params.name}`)
+    res.send(`GET request: Infos about actor "${req.params.name}"`)
     /* res.json(actors.find((actors) => {
         return actors.name === req.params.name })) */
 });
