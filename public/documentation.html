@@ -5,6 +5,24 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>REST API</title>
+
+		<style>
+			body {
+				line-height: 1.6;
+			}
+
+			pre {
+				background-color: #f4f4f4;
+				padding: 5px;
+			}
+
+			code {
+				background-color: #f4f4f4;
+				padding: 2px 5px;
+				border-radius: 3px;
+			}
+		</style>
+
 	</head>
 
 	<body>
@@ -20,10 +38,8 @@
 		</p>
 
 		<h1>API Endpoints</h1>
-		<br>
 
 		<h2>Movie related API Endpoints</h2>
-		<br>
 
 		<h3>1. Get all the movies</h3>
 
@@ -39,6 +55,24 @@
 		<p>
 			<b>Response data:</b> A JSON object holding a list of all movies
 		</p>
+		<pre><code>
+[                                    
+  {                                  
+    "title": "2001: A Space Odyssey",
+    "genre": "Science Fiction",      
+    "description": "A mind-bending journey through space and human evolution, driven by a mysterious monolith and an AI named HAL.",
+    "releaseDate": "1968-04-02",     
+    "rating": 8.3,                   
+    "mainActors": [                  
+        "Keir Dullea",               
+        "Gary Lockwood",             
+        "William Sylvester"          
+        ],                           
+    "director": "Stanley Kubrick"    
+   },                                
+   ...                               
+];                                   
+</code></pre>
 
 
 		<br>
@@ -46,7 +80,7 @@
 		<h3> 2. Get movie by title </h3>
 
 		<p>
-			<b>Url:</b> /movies/:title
+			<b>Url:</b> <code>/movies/:title</code>
 		</p>
 		<p>
 			<b>Method:</b> GET
@@ -55,8 +89,23 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object holding title, genre, director, actors, rate, image of the movie
+			<b>Response data:</b> A JSON object holding details of a movie
 		</p>
+		<pre><code>
+{
+	"title": "Blade Runner",
+	"genre": "Science Fiction / Neo-noir",
+	"description": "In a dystopian future, a blade runner is tasked with hunting down bioengineered beings known as replicants.",
+	"releaseDate": "1982-06-25",
+	"rating": 8.1,
+	"mainActors": [
+		"Harrison Ford",
+		"Rutger Hauer",
+		"Sean Young"
+	],
+	"director": "Ridley Scott"
+}
+		</code></pre>
 
 
 		<br>
@@ -64,7 +113,7 @@
 		<h3> 3. Get genre by description </h3>
 
 		<p>
-			<b>Url:</b> /genres/:name
+			<b>Url:</b> <code>/genres/:name</code>
 		</p>
 		<p>
 			<b>Method:</b> GET
@@ -82,7 +131,7 @@
 		<h3> 4. Get infos about a director </h3>
 
 		<p>
-			<b>Url:</b> /directors/:name
+			<b>Url:</b> <code>/directors/:name </code>
 		</p>
 		<p>
 			<b>Method:</b> GET
@@ -100,7 +149,7 @@
 		<h3> 5. Get infos about an actor </h3>
 
 		<p>
-			<b>Url:</b> /actors/:name
+			<b>Url:</b> <code>/actors/:name </code>
 		</p>
 		<p>
 			<b>Method:</b> GET
@@ -121,7 +170,7 @@
 		<h3> 6. Register a new user </h3>
 
 		<p>
-			<b>Url:</b> /users
+			<b>Url:</b> <code>/users</code>
 		</p>
 		<p>
 			<b>Method:</b> POST
@@ -138,7 +187,7 @@
 		<h3> 7. Update user info </h3>
 
 		<p>
-			<b>Url:</b> /users/:username/:name
+			<b>Url:</b> <code>/users/:username/:name</code>
 		</p>
 		<p>
 			<b>Method:</b> PUT
@@ -155,7 +204,7 @@
 		<h3> 8. Delete user </h3>
 
 		<p>
-			<b>Url:</b> /users/:username
+			<b>Url:</b> <code>/users/:username </code>
 		</p>
 		<p>
 			<b>Method:</b> DELETE
@@ -164,7 +213,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A response indicating that user has been deleted 
+			<b>Response data:</b> A response indicating that user has been deleted
 
 		</p>
 		<br>
@@ -172,7 +221,7 @@
 		<h3> 9. Add movie to favorites list </h3>
 
 		<p>
-			<b>Url:</b> /users/:username/favorites/:movieId
+			<b>Url:</b> <code>/users/:username/favorites/:movieId</code>
 		</p>
 		<p>
 			<b>Method:</b> POST
@@ -181,7 +230,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A response that the movie has been added 
+			<b>Response data:</b> A response that the movie has been added
 
 		</p>
 		<br>
@@ -189,7 +238,7 @@
 		<h3> 10. Remove movie from favorites list </h3>
 
 		<p>
-			<b>Url:</b> /users/:username/favorites/:movieId
+			<b>Url:</b> <code>/users/:username/favorites/:movieId</code>
 		</p>
 		<p>
 			<b>Method:</b> DELETE
@@ -207,7 +256,7 @@
 		<h3> 11. Add movie to To Watch list </h3>
 
 		<p>
-			<b>Url:</b> /users/:username/towatch/:movieId
+			<b>Url:</b> <code>/users/:username/towatch/:movieId</code>
 		</p>
 		<p>
 			<b>Method:</b> POST
@@ -216,7 +265,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A response that the movie has been added 
+			<b>Response data:</b> A response that the movie has been added
 
 		</p>
 		<br>
@@ -225,7 +274,7 @@
 		<h3> 12. Remove movie from To Watch list </h3>
 
 		<p>
-			<b>Url:</b> /users/:username/towatch/:movieId
+			<b>Url:</b> <code>/users/:username/towatch/:movieId</code>
 		</p>
 		<p>
 			<b>Method:</b> DELETE
