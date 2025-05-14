@@ -176,12 +176,33 @@
 			<b>Method:</b> POST
 		</p>
 		<p>
-			<b>Request data:</b> A JSON object containing user's details
+			<b>Request data:</b> A JSON object containing user's details (Username, Password, Email, Birthday are required)
 		</p>
+		<pre><code>
+{
+	"Username": "User123",
+	"Password": "Passw123",
+	"Email": "user123@gmail.com",
+	"Birthday": "1990-04-25",
+	"City": "Berlin"
+}
+		</code></pre>
 		<p>
-			<b>Response data:</b> A response indicating if the user has been added or not
-
+			<b>Response data:</b> A JSON object containing the User info
 		</p>
+		<pre><code>
+{
+	"Username": "User123",
+	"Password": "Passw123",
+	"Email": "user123@gmail.com",
+	"Birthday": "1990-04-25T00:00:00.000Z",
+	"City": "Berlin",
+	"FavoriteMovies": [],
+	"ToWatch": [],
+	"_id": "682499ffcb4a4162090eec7c",
+	"__v": 0
+}
+		</code></pre>
 		<br>
 
 		<h3> 7. Update user info </h3>
