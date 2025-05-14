@@ -56,21 +56,43 @@
 			<b>Response data:</b> A JSON object holding a list of all movies
 		</p>
 		<pre><code>
-[                                    
-  {                                  
-    "title": "2001: A Space Odyssey",
-    "genre": "Science Fiction",      
-    "description": "A mind-bending journey through space and human evolution, driven by a mysterious monolith and an AI named HAL.",
-    "releaseDate": "1968-04-02",     
-    "rating": 8.3,                   
-    "mainActors": [                  
-        "Keir Dullea",               
-        "Gary Lockwood",             
-        "William Sylvester"          
-        ],                           
-    "director": "Stanley Kubrick"    
-   },                                
-   ...                               
+[
+{
+"Genre": {
+"Name": "Sci-Fi",
+"Description": "Science fiction dealing with futuristic concepts, dystopian societies, and moral questions."
+},
+"Director": {
+"Name": "Stanley Kubrick",
+"Bio": "Stanley Kubrick was an iconic American filmmaker known for his meticulous attention to detail and groundbreaking work in cinema, creating some of the most influential films of the 20th century.",
+"Birth": "1928",
+"Death": "1999"
+},
+"_id": "68235d99177da4e158d8537a",
+"Title": "A Clockwork Orange",
+"Description": "In a dystopic future Britain, a gang of delinquents indulge in ultra-violence until their leader is arrested and subjected to experimental conditioning.",
+"Actors": [
+{
+	"_id": "6824a519afc03f25c8c0fd47",
+	"Name": "Malcolm McDowell",
+	"Bio": "British actor known for intense performances and unique screen presence."
+},
+{
+	"_id": "6824a519afc03f25c8c0fd48",
+	"Name": "Patrick Magee",
+	"Bio": "Irish actor known for his work in theater and collaborations with Kubrick."
+},
+{
+	"_id": "6824a519afc03f25c8c0fd49",
+	"Name": "Adrienne Corri",
+	"Bio": "Scottish actress best known for her role in 'A Clockwork Orange'."
+}
+],
+"Release": 1971,
+"Rating": 8.3,
+"ImagePath": "a-clockwork-orange.png"
+},                          
+...                               
 ];                                   
 </code></pre>
 
@@ -93,17 +115,39 @@
 		</p>
 		<pre><code>
 {
-	"title": "Blade Runner",
-	"genre": "Science Fiction / Neo-noir",
-	"description": "In a dystopian future, a blade runner is tasked with hunting down bioengineered beings known as replicants.",
-	"releaseDate": "1982-06-25",
-	"rating": 8.1,
-	"mainActors": [
-		"Harrison Ford",
-		"Rutger Hauer",
-		"Sean Young"
-	],
-	"director": "Ridley Scott"
+"Genre": {
+"Name": "Sci-Fi",
+"Description": "Horror-infused science fiction focused on extraterrestrial life and survival."
+},
+"Director": {
+"Name": "Ridley Scott",
+"Bio": "British director known for atmospheric and visually striking films in multiple genres.",
+"Birth": "1937",
+"Death": null
+},
+"_id": "68235d99177da4e158d8537f",
+"Title": "Alien",
+"Description": "A spaceship crew encounters a deadly alien life form after responding to a distress signal. As the creature hunts them down, they must fight for survival in the vast emptiness of space.",
+"Actors": [
+{
+	"_id": "6824a86cde4fb6697579e9b6",
+	"Name": "Sigourney Weaver",
+	"Bio": "American actress best known for her role as Ellen Ripley."
+},
+{
+	"_id": "6824a86cde4fb6697579e9b7",
+	"Name": "Tom Skerritt",
+	"Bio": "Veteran actor who played Captain Dallas."
+},
+{
+	"_id": "6824a86cde4fb6697579e9b8",
+	"Name": "John Hurt",
+	"Bio": "British actor who played Kane in the film."
+}
+],
+"Release": 1979,
+"Rating": 8.5,
+"ImagePath": "alien.png"
 }
 		</code></pre>
 
