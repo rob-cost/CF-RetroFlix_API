@@ -21,10 +21,10 @@ let movieSchema = mongoose.Schema ({
 });
 
 let userSchema = mongoose.Schema ({
-    Username: {tye: String, required: true},
+    Username: {type: String, required: true},
     Password: {type: String, required: true},
-    Email: {tye: String, required: true},
-    Birthdate: Date,
+    Email: {type: String, required: true},
+    Birthday: {type: Date, required: true},
     City: {type: String},
     FavoriteMovies: [{ type:mongoose.Schema.Types.ObjectId, ref: 'Movie'}],
     ToWatch: [{ type:mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
