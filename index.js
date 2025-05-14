@@ -22,21 +22,40 @@ app.use(express.static('public'));
 // === MOVIE ROUTES ===
 
 // GET a list of all movies
-app.get('/movies', (req, res) => {
-    res.json(movies);
+app.get('/movies', async (req, res) => {
+    await Movies.find()
+    .then ((movies) => {
+        res.status(201).json(movies)
+    })
+    .catch ((err) => {
+        console.error(err);
+        res.status(501).send('Error: '+ err);
+    });
 });
 
 // GET infos about a movie
-app.get('/movies/:title', (req, res) => {
-    res.json(movies.find((movies) => {
-        return movies.title === req.params.title }))
+app.get('/movies/:title', async (req, res) => {
+    const movieTitle = new RegExp(req.params.title, 'i');
+    await Movies.findOne({ Title: movieTitle})
+    .then ((movies) => {
+        res.status(201).json(movies)
+    })
+    .catch ((err) => {
+        console.error(err);
+        res.status(501).send('Error: '+ err);
+    });
 });
 
 // GET genre description
-app.get('/genres/:name', (req, res) => {
-    res.send(`GET request: Description of the genre "${req.params.name}"`)
-   /*  res.send(genres.find((genres) => {
-        return genres.name === req.params.name})) */
+app.get('/genres/:name', async (req, res) => {
+   await Movies.findOne({ 'Genre.Name': req.params.name }, 'Genre')
+   .then ((genre) => {
+    res.status(201).json(genre)
+   })
+   .catch ((err) => {
+    console.error(err);
+    res.status(501).send('Error: '+ err);
+   })
 });
 
 // GET infos about a director
@@ -60,7 +79,7 @@ app.post('/users', async (req, res) => {
     await Users.findOne ({ Username: req.body.Username })
     .then ((user) => {
         if (user) {
-            return res.status (400).send(req.body.Username + 'already exist');
+            return res.status (400).send(req.body.Username + ' already exist ');
         } else {
             Users.create ({
                 Username: req.body.Username,
