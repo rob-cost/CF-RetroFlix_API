@@ -31,7 +31,7 @@
 		<p> The myFlix API is the server component of a full-stack Java-Script web application
 			that provides access to a vintage-movie database.
 			Built with the MERN stack (MongoDB, Express, React, Node.js), this API stores informations of different
-			movies and users preferences of this movies.
+			movies, actors and directors together with users details and their preferences.
 			The REST API will be accesed using common HTTP methods like GET and POST while (CRUD) will be used to
 			retrieve data from the database and store that data
 			in a non-relational way.
@@ -53,45 +53,43 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object holding a list of all movies
+			<b>Response data:</b> A JSON array holding a list of all movies with their info.
 		</p>
 		<pre><code>
 [
 {
-"Genre": {
-"Name": "Sci-Fi",
-"Description": "Science fiction dealing with futuristic concepts, dystopian societies, and moral questions."
-},
-"Director": {
-"Name": "Stanley Kubrick",
-"Bio": "Stanley Kubrick was an iconic American filmmaker known for his meticulous attention to detail and groundbreaking work in cinema, creating some of the most influential films of the 20th century.",
-"Birth": "1928",
-"Death": "1999"
-},
-"_id": "68235d99177da4e158d8537a",
 "Title": "A Clockwork Orange",
 "Description": "In a dystopic future Britain, a gang of delinquents indulge in ultra-violence until their leader is arrested and subjected to experimental conditioning.",
+"Genre": {
+	"Name": "Sci-Fi",
+	"Description": "Science fiction dealing with futuristic concepts, dystopian societies, and moral questions."
+},
+"Director": {
+	"Name": "Stanley Kubrick",
+	"Bio": "Stanley Kubrick was an iconic American filmmaker known for his meticulous attention to detail and groundbreaking work in cinema, creating some of the most influential films of the 20th century.",
+	"Birth": "1928",
+	"Death": "1999"
+},
 "Actors": [
-{
-	"_id": "6824a519afc03f25c8c0fd47",
-	"Name": "Malcolm McDowell",
-	"Bio": "British actor known for intense performances and unique screen presence."
-},
-{
-	"_id": "6824a519afc03f25c8c0fd48",
-	"Name": "Patrick Magee",
-	"Bio": "Irish actor known for his work in theater and collaborations with Kubrick."
-},
-{
-	"_id": "6824a519afc03f25c8c0fd49",
-	"Name": "Adrienne Corri",
-	"Bio": "Scottish actress best known for her role in 'A Clockwork Orange'."
-}
+	{
+		"_id": "6825ace1a63b87d5b023806c",
+		"Name": "Malcolm McDowell",
+		"Bio": "British actor known for intense performances and unique screen presence."
+	},
+	{
+		"_id": "6825ace1a63b87d5b023806d",
+		"Name": "Patrick Magee",
+		"Bio": "Irish actor known for his work in theater and collaborations with Kubrick."
+	},
+	{
+		"_id": "6825ace1a63b87d5b023806e",
+		"Name": "Adrienne Corri",
+		"Bio": "Scottish actress best known for her role in 'A Clockwork Orange'."
+	}
 ],
-"Release": 1971,
-"Rating": 8.3,
-"ImagePath": "a-clockwork-orange.png"
-},                          
+"ImagePath": "a-clockwork-orange.png",
+"id": "68235d99177da4e158d8537a" 
+},
 ...                               
 ];                                   
 </code></pre>
@@ -111,43 +109,41 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object holding details of a movie
+			<b>Response data:</b> A JSON object holding info of a specific movie.
 		</p>
 		<pre><code>
 {
-"Genre": {
-"Name": "Sci-Fi",
-"Description": "Horror-infused science fiction focused on extraterrestrial life and survival."
-},
-"Director": {
-"Name": "Ridley Scott",
-"Bio": "British director known for atmospheric and visually striking films in multiple genres.",
-"Birth": "1937",
-"Death": null
-},
-"_id": "68235d99177da4e158d8537f",
 "Title": "Alien",
 "Description": "A spaceship crew encounters a deadly alien life form after responding to a distress signal. As the creature hunts them down, they must fight for survival in the vast emptiness of space.",
+"Genre": {
+	"Name": "Sci-Fi",
+	"Description": "Horror-infused science fiction focused on extraterrestrial life and survival."
+},
+"Director": {
+	"Name": "Ridley Scott",
+	"Bio": "British director known for atmospheric and visually striking films in multiple genres.",
+	"Birth": "1937",
+	"Death": null
+},
 "Actors": [
-{
-	"_id": "6824a86cde4fb6697579e9b6",
-	"Name": "Sigourney Weaver",
-	"Bio": "American actress best known for her role as Ellen Ripley."
-},
-{
-	"_id": "6824a86cde4fb6697579e9b7",
-	"Name": "Tom Skerritt",
-	"Bio": "Veteran actor who played Captain Dallas."
-},
-{
-	"_id": "6824a86cde4fb6697579e9b8",
-	"Name": "John Hurt",
-	"Bio": "British actor who played Kane in the film."
-}
+	{
+		"_id": "6825bacd97ddd055c96ccb32",
+		"Name": "Sigourney Weaver",
+		"Bio": "American actress best known for her role as Ellen Ripley."
+	},
+	{
+		"_id": "6825bacd97ddd055c96ccb33",
+		"Name": "Tom Skerritt",
+		"Bio": "Veteran actor who played Captain Dallas."
+	},
+	{
+		"_id": "6825bacd97ddd055c96ccb34",
+		"Name": "John Hurt",
+		"Bio": "British actor who played Kane in the film."
+	}
 ],
-"Release": 1979,
-"Rating": 8.5,
-"ImagePath": "alien.png"
+"ImagePath": "alien.png",
+"id": "68235d99177da4e158d8537f"
 }
 		</code></pre>
 
@@ -166,9 +162,14 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A text message indicating the description of the genre
+			<b>Response data:</b> A JSON object containing info of a secific genre.
 		</p>
-
+		<pre><code>
+{
+"Name": "Drama",
+"Description": "Crime drama focusing on power, corruption, and downfall of an anti-hero."
+}
+		</code></pre>
 
 		<br>
 
@@ -184,9 +185,26 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object containing name, bio, birth and death-year of a director
+			<b>Response data:</b> A JSON object containing info of a specific director.
 		</p>
-
+		<pre><code>
+{
+"Name": "Ridley Scott",
+"Bio": "British director known for atmospheric and visually striking films in multiple genres.",
+"Birth": "1937",
+"Death": null,
+"Movies": [
+	{
+		"Title": "Blade Runner",
+		"Release": "1982"
+	},
+	{
+		"Title": "Alien",
+		"Release": "1979"
+	}
+]
+}
+		</code></pre>
 
 		<br>
 
@@ -202,9 +220,24 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object containing bio of an actor
-
+			<b>Response data:</b> A JSON object containing info of a specific actor.
 		</p>
+		<pre><code>
+{
+"Name": "Harrison Ford",
+"Bio": "Actor and producer, famous for Han Solo and Indiana Jones.",
+"Movies": [
+	{
+		"Title": "Star Wars Episode IV",
+		"Release": "1977"
+	},
+	{
+		"Title": "Blade Runner",
+		"Release": "1982"
+	}
+]
+}
+		</code></pre>
 		<br>
 
 
@@ -232,7 +265,7 @@
 }
 		</code></pre>
 		<p>
-			<b>Response data:</b> A JSON object containing the User info
+			<b>Response data:</b> A JSON object containing the User info.
 		</p>
 		<pre><code>
 {
@@ -252,18 +285,48 @@
 		<h3> 7. Update user info </h3>
 
 		<p>
-			<b>Url:</b> <code>/users/:username/:name</code>
+			<b>Url:</b> <code>/users/:username/</code>
 		</p>
 		<p>
 			<b>Method:</b> PUT
 		</p>
 		<p>
-			<b>Request data:</b> None
+			<b>Request data:</b> A JSON object containing user updates.
 		</p>
+		<pre><code>
+{
+	"Username": "User123",
+	"Password": "Userpassword",
+	"Email": "user@gmail.com",
+	"Birthday": "1990-04-25",
+	"City": "Paris"
+}
+		</code></pre>
 		<p>
-			<b>Response data:</b> A response indicating if the user has been added or not
-
+			<b>Response data:</b> A JSON object containing the new user infos.
 		</p>
+		<pre><code>
+{
+"message": "User updated successfully",
+"user": {
+	"_id": "68243dbad838410c3ffecfcf",
+	"Username": "Robs3",
+	"Password": "Userpaword",
+	"Email": "robs@gmail.com",
+	"Birthdate": "1983-11-07T00:00:00.000Z",
+	"City": "Berlin",
+	"FavoriteMovies": [
+		"68235d99177da4e158d85383",
+		"68235d99177da4e158d8537a",
+		"68235d99177da4e158d85382"
+	],
+	"ToWatch": [
+		"68235d99177da4e158d8537d"
+	],
+	"Birthday": "1993-04-25T00:00:00.000Z"
+}
+}
+		</code></pre>
 		<br>
 
 		<h3> 8. Delete user </h3>
@@ -278,8 +341,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A response indicating that user has been deleted
-
+			<b>Response data:</b> A response indicating that user has been deleted.
 		</p>
 		<br>
 
@@ -295,9 +357,31 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A response that the movie has been added
-
+			<b>Response data:</b> A JSON object with the user info updated.
 		</p>
+		<pre><code>
+{
+"Message": "The movie has been added",
+"User": {
+	"_id": "68243dbad838410c3ffecfcf",
+	"Username": "Robs3",
+	"Password": "Userpaword",
+	"Email": "robs@gmail.com",
+	"Birthdate": "1983-11-07T00:00:00.000Z",
+	"City": "Berlin",
+	"FavoriteMovies": [
+		"68235d99177da4e158d85383",
+		"68235d99177da4e158d85382",
+		"68235d99177da4e158d8537a"
+	],
+	"ToWatch": [
+		"68235d99177da4e158d8537d",
+		"68235d99177da4e158d8537a"
+	],
+	"Birthday": "1993-04-25T00:00:00.000Z"
+}
+}
+		</code></pre>
 		<br>
 
 		<h3> 10. Remove movie from favorites list </h3>
@@ -312,9 +396,29 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A response that the movie has been removed
-
+			<b>Response data:</b> A JSON object with the user info updated
 		</p>
+		<pre><code>
+{
+"Message": "The movie has been removed",
+"User": {
+	"_id": "68243dbad838410c3ffecfcf",
+	"Username": "Robs3",
+	"Password": "Userpaword",
+	"Email": "robs@gmail.com",
+	"Birthdate": "1983-11-07T00:00:00.000Z",
+	"City": "Berlin",
+	"FavoriteMovies": [
+		"68235d99177da4e158d85383",
+		"68235d99177da4e158d85382"
+	],
+	"ToWatch": [
+		"68235d99177da4e158d8537d"
+	],
+	"Birthday": "1993-04-25T00:00:00.000Z"
+}
+}
+		</code></pre>
 		<br>
 
 
@@ -330,9 +434,30 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A response that the movie has been added
-
+			<b>Response data:</b> A JSON object with the user info updated.
 		</p>
+		<pre><code>
+{
+"Message": "The movie has been added",
+"User": {
+	"_id": "68243dbad838410c3ffecfcf",
+	"Username": "Robs3",
+	"Password": "Userpaword",
+	"Email": "robs@gmail.com",
+	"Birthdate": "1983-11-07T00:00:00.000Z",
+	"City": "Berlin",
+	"FavoriteMovies": [
+		"68235d99177da4e158d85383",
+		"68235d99177da4e158d85382"
+	],
+	"ToWatch": [
+		"68235d99177da4e158d8537d",
+		"68235d99177da4e158d8537a"
+	],
+	"Birthday": "1993-04-25T00:00:00.000Z"
+}
+}
+		</code></pre>
 		<br>
 
 
@@ -348,9 +473,29 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A response that the movie has been removed
-
+			<b>Response data:</b> A JSON object with the user info updated.
 		</p>
+		<pre><code>
+{
+"Message": "The movie has been removed",
+"User": {
+	"_id": "68243dbad838410c3ffecfcf",
+	"Username": "Robs3",
+	"Password": "Userpaword",
+	"Email": "robs@gmail.com",
+	"Birthdate": "1983-11-07T00:00:00.000Z",
+	"City": "Berlin",
+	"FavoriteMovies": [
+		"68235d99177da4e158d85383",
+		"68235d99177da4e158d85382"
+	],
+	"ToWatch": [
+		"68235d99177da4e158d8537d"
+	],
+	"Birthday": "1993-04-25T00:00:00.000Z"
+}
+}
+		</code></pre>
 		<br>
 
 
