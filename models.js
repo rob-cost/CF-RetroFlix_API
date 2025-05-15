@@ -7,6 +7,7 @@ let movieSchema = mongoose.Schema ({
         Name: String,
         Description: String
     },
+    Release: {type: String},
     Director: {
         Name: String,
         Bio: String,
@@ -17,7 +18,9 @@ let movieSchema = mongoose.Schema ({
         Name: String,
         Bio: String
     }],
+    Rating: {type: String},
     ImagePath: String
+
 });
 
 let userSchema = mongoose.Schema ({
