@@ -49,7 +49,7 @@ app.get('/movies', async (req, res) => {
 
 // GET infos about a movie
 app.get('/movies/:title', async (req, res) => {
-    const movieTitle = new RegExp(`^${req.params.title}$`, 'i');   // make the parameter case insensitive
+    const movieTitle = new RegExp(`^${req.params.title}$`, 'i');   // make the Url case insensitive
     await Movies.findOne({ Title: movieTitle})
     .then ((movie) => {
 
@@ -79,16 +79,20 @@ app.get('/movies/:title', async (req, res) => {
 // GET genre description
 app.get('/genres/:name', async (req, res) => {
     const genreName = new RegExp(`^${req.params.name}$`, 'i');
-    await Movies.findOne({ 'Genre.Name': genreName }, 'Genre')
-   .then ((genre) => {
+    await Movies.find({ 'Genre.Name': genreName })
+   .then ((movies) => {
 
-        if (!genre) {
-            return res.status(404).send(`Genre ${req.params.name} not found`);
+        if (!movies) {
+            return res.status(404).send(`Genre ${req.params.name} not found in any movies`);
         }
 
+        const genre = movies[0].Genre;  // takes the genre from the first match
         const orderGenre = {
-            Name: genre.Genre.Name,
-            Description: genre.Genre.Description
+            Name: genre.Name,
+            Description: genre.Description,
+            Movies: movies.map(movie => ({   // creates an array of movies of the same genre  
+                Title: movie.Title
+            }))
         }
         res.status(201).json(orderGenre)
    })
@@ -114,7 +118,7 @@ app.get ('/directors/:name', async (req,res) => {
             Bio: director.Bio,
             Birth: director.Birth,
             Death: director.Death,
-            Movies: movies.map(movie => ({
+            Movies: movies.map(movie => ({   // creates an array of all movies with the same director
                 Title: movie.Title,
                 Release: movie.Release
             }))
@@ -138,10 +142,6 @@ app.get ('/actors/:name', async (req, res) => {
         }
 
         const actor = movies[0].Actors.find(a => a.Name.toLowerCase() === req.params.name.toLowerCase());
-
-        if (!actor) {
-            return res.status(404).send(`The actor ${req.params.name} not found in movies`)
-        }
         const orderActor = {
             Name: actor.Name,
             Bio: actor.Bio,
@@ -170,30 +170,51 @@ app.get('/users', async (req, res) => {
 
 // CREATE new user
 app.post('/users', async (req, res) => {
-    await Users.findOne ({ Username: req.body.Username })
-    .then ((user) => {
+    const userName = new RegExp(`^${req.body.Username}$`, 'i');
+  
+    await Users.findOne({ Username: userName })
+      .then( async (user) => {
+        
+        // validate there is no user with the same username
         if (user) {
-            return res.status (400).send(req.body.Username + ' already exist ');
-        } else {
-            Users.create ({
-                Username: req.body.Username,
-                Password: req.body.Password,
-                Email: req.body.Email,
-                Birthday: req.body.Birthday,
-                City: req.body.City
-            })
-            .then((user) =>{res.status(201).json({user}) })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send('Error: ' + error);
-            })
+          return res.status(400).send(req.body.Username + ' already exists');
+        }
+  
+        // validate that required fields are inserted
+        const fields = ['Username', 'Password', 'Email', 'Birthday'];
+  
+        for (let i = 0; i < fields.length; i++) {
+          if (!req.body[fields[i]]) {
+            return res.status(400).send(`You must enter this field: ${fields[i]}`)
           }
+        }
+  
+        // create user
+        
+         await Users.create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday,
+            City: req.body.City,
+          })
+          .then ((user) => {
+            return res.status(201).json({
+                Message: 'New user has been created',
+                User: user
+          })
         })
-        .catch((error) => {
-          console.error(error);
-          res.status(500).send('Error: ' + error);
+         .catch ((err) => {
+          console.error(err);
+          return res.status(500).send('Error: ' + err);
         });
-});
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  });
+  
 
 // UPDATE user infos by username 
 app.put('/users/:username', async (req, res) => {
