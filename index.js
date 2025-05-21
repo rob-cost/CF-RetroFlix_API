@@ -22,11 +22,29 @@ const app = express();
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
+
+const cors = require('cors');
+app.use(cors());
+
+/* let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+})); */
+
 let auth = require('./auth')(app);
 
 // Creation Validation schema
 const schema = joi.object({
     Username: joi.string()
+    .alphanum()
     .min(3)
     .max(30)
     .required(),
@@ -198,6 +216,10 @@ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, re
 
 // CREATE new user
 app.post('/users', async (req, res) => {
+
+    // ecnrypt password
+    let hashedPassword = Users.hashPassword(req.body.Password);
+
     try {
         const userName = new RegExp(`^${req.body.Username}$`, 'i');
         const {error, value} = schema.validate(req.body);
@@ -216,7 +238,7 @@ app.post('/users', async (req, res) => {
             else {
                 const newUser = await Users.create({
                     Username: req.body.Username,
-                    Password: req.body.Password,
+                    Password: hashedPassword,
                     Email: req.body.Email,
                     Birthday: req.body.Birthday,
                     City: req.body.City,
@@ -237,7 +259,7 @@ app.post('/users', async (req, res) => {
 
 // UPDATE user infos by username 
 app.put('/users/:username', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    
+
     // validate user
     if(req.user.Username !== req.params.username){
         return res.status(400).send('Permission denied');
@@ -264,7 +286,7 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         const updatedUser = await Users.findOneAndUpdate({ Username: userName }, { $set:
             {
                 Username: req.body.Username,
-                Password: req.body.Password,
+                Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday,
                 City: req.body.City
@@ -473,8 +495,7 @@ app.use((err, req, res, next) => {
 })
 
 // listen for request
-app.listen(8080, () => {
-    console.log('Your app is listening on ort 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
 });
-
-
