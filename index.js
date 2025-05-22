@@ -328,16 +328,6 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
 
 });
 
-app.get('/users', async (req, res) => {
-    try {
-        const users = await Users.find();
-        return res.json(users);
-    }
-    catch (err) {
-        return res.status(500).send('error');
-    }
-});
-
 // DELETE user
 app.delete('/users/:username', passport.authenticate('jwt', {session: false}), async (req, res) => {
 
