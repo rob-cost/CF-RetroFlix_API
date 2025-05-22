@@ -279,7 +279,7 @@ app.post('/users', async (req, res) => {
 app.put('/users/:username', passport.authenticate('jwt', {session: false}), async (req, res) => {
 
     // validate user
-    if(req.user.Username !== req.params.username){
+    if(req.user.Username.toLowerCase() !== req.params.username.toLocaleLowerCase()){
         return res.status(401).send('Permission denied');
     }
 
@@ -305,13 +305,14 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
             updateFields.Password = hashedPassword;
         }
 
-        const userName = new RegExp(`^${req.body.Username}$`, 'i');
-        if (userName === Users.Username) {
+        // validate that no other users have that username
+        const checkName = await Users.findOne({Username: updateFields.Username });
+        if (checkName) {
             return res.status(400).send('Username already taken');
         }
-        
-        
+ 
         // perform the update
+        const userName = new RegExp(`^${req.params.username}$`, 'i');
         const updatedUser = await Users.findOneAndUpdate({ Username: userName },
             { $set: updateFields },
             { new: true }); 
@@ -325,6 +326,16 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         res.status(500).send('Error: ' + err);
         }
 
+});
+
+app.get('/users', async (req, res) => {
+    try {
+        const users = await Users.find();
+        return res.json(users);
+    }
+    catch (err) {
+        return res.status(500).send('error');
+    }
 });
 
 // DELETE user
@@ -523,3 +534,7 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
 });
+
+/* app.listen(8080, () => {
+    console.log('Your app is listening on ort 8080.');
+}); */
