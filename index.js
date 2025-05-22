@@ -75,10 +75,12 @@ const updateUserSchema = joi.object({
     Username: joi.string()
     .alphanum()
     .min(3)
-    .max(30),
+    .max(30)
+    .optional(),
 
     Password: joi.string()
-    .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+    .optional(),
 
     Email: joi.string()
     .email({ minDomainSegments: 2 }),
@@ -86,7 +88,8 @@ const updateUserSchema = joi.object({
     Birthday: joi.date()
     .min(new Date('1920-01-01'))
     .max(new Date('2025-01-01'))
-    .iso(),
+    .iso()
+    .optional(),
 
     City: joi.string()
     .alphanum()
