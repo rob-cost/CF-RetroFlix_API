@@ -286,14 +286,14 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
     try {
 
         // validate body 
-        const {error, value} = updateUserSchema.validate(req.body, {allowUnknown:true, abortEarly:false}) ;
+        const {error, value} = updateUserSchema.validate(req.body) ;
         if (error) {
             return res.status(400).json({
                 message: error.details[0].message
             })
         }
 
-        const updateFields = {};
+        let updateFields = {};
         if (req.body.Username) updateFields = req.body.Username;
         if (req.body.Password) updateFields = req.body.Password;
         if (req.body.Email) updateFields = req.body.Email;
