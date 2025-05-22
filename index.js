@@ -44,7 +44,7 @@ app.use(cors({
 let auth = require('./auth')(app);
 
 // Creation Validation schema
-const schema = joi.object({
+const createUserSchema = joi.object({
     Username: joi.string()
     .alphanum()
     .min(3)
@@ -70,7 +70,30 @@ const schema = joi.object({
     .min(3)
     .max(30)
     .optional(),
-})
+});
+const updateUserSchema = joi.object({
+    Username: joi.string()
+    .alphanum()
+    .min(3)
+    .max(30),
+
+    Password: joi.string()
+    .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+
+    Email: joi.string()
+    .email({ minDomainSegments: 2 }),
+
+    Birthday: joi.date()
+    .min(new Date('1920-01-01'))
+    .max(new Date('2025-01-01'))
+    .iso(),
+
+    City: joi.string()
+    .alphanum()
+    .min(3)
+    .max(30)
+    .optional(),
+});
 
 
 // === MOVIE ROUTES ===
@@ -212,8 +235,10 @@ app.post('/users', async (req, res) => {
     let hashedPassword = Users.hashPassword(req.body.Password);
 
     try {
+
+        // validate user request
         const userName = new RegExp(`^${req.body.Username}$`, 'i');
-        const {error, value} = schema.validate(req.body);
+        const {error, value} = createUserSchema.validate(req.body);
         if (error) {
             return res.status(400).json({
                 message: error.details[0].message
@@ -259,7 +284,7 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
     try {
 
         // validate body 
-        const {error, value} = schema.validate(req.body, {allowUnknown:true, abortEarly:false}) ;
+        const {error, value} = updateUserSchema.validate(req.body, {allowUnknown:true, abortEarly:false}) ;
         if (error) {
             return res.status(400).json({
                 message: error.details[0].message
