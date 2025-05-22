@@ -294,11 +294,11 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         }
 
         let updateFields = {};
-        if (req.body.Username) updateFields = req.body.Username;
-        if (req.body.Password) updateFields = req.body.Password;
-        if (req.body.Email) updateFields = req.body.Email;
-        if (req.body.Birthday) updateFields = req.body.Birthday;
-        if (req.body.City) updateFields = req.body.City;
+        if (req.body.Username) updateFields.Username = req.body.Username;
+        if (req.body.Password) updateFields.Password = req.body.Password;
+        if (req.body.Email) updateFields.Email = req.body.Email;
+        if (req.body.Birthday) updateFields.Birthday = req.body.Birthday;
+        if (req.body.City) updateFields.City = req.body.City;
 
         if (req.body.Password) {
             const hashedPassword = Users.hashPassword(req.body.Password);
