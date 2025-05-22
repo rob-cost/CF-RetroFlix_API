@@ -79,7 +79,6 @@ const updateUserSchema = joi.object({
     .optional(),
 
     Password: joi.string()
-    .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
     .optional(),
 
     Email: joi.string()
