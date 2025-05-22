@@ -90,7 +90,7 @@ app.get('/movies', passport.authenticate('jwt', {session: false}), async (req, r
             ImagePath: movie.ImagePath,
             id: movie._id
         }))
-        res.status(201).json(orderMovies)
+        res.status(200).json(orderMovies)
     }
     catch (err) {
         res.status(500).send('Error' + err);
@@ -103,7 +103,7 @@ app.get('/movies/:title', passport.authenticate('jwt', {session: false}), async 
         const movieTitle = new RegExp(`^${req.params.title}$`, 'i');
         const movie = await Movies.findOne({ Title: movieTitle });
         if (!movie) {
-            return res.status(500).send(`Movies ${req.params.title} not found`);
+            return res.status(404).send(`Movies ${req.params.title} not found`);
         }
         else {
             const orderMovies = {
@@ -117,11 +117,11 @@ app.get('/movies/:title', passport.authenticate('jwt', {session: false}), async 
                 ImagePath: movie.ImagePath,
                 id: movie._id
             }
-            res.status(201).json(orderMovies);
+            res.status(200).json(orderMovies);
         }
     }
     catch (err) {
-        res.status(501).send('Error' + err);
+        res.status(500).send('Error' + err);
     }
 })
 
@@ -131,7 +131,7 @@ app.get('/genres/:name', passport.authenticate('jwt', {session: false}), async (
         const genreName = new RegExp(`^${req.params.name}$`, 'i');
         const movies = await Movies.find({ 'Genre.Name': genreName });
         if (!movies) {
-            return res.status(500).send(`Genre ${req.params.name} not found in any movie`);
+            return res.status(404).send(`Genre ${req.params.name} not found in any movie`);
         }
         else {
             const movie = movies[0].Genre;
@@ -142,11 +142,11 @@ app.get('/genres/:name', passport.authenticate('jwt', {session: false}), async (
                     Title: movies.Title
                 }))
             }
-            return res.status(201).json(orderGenre);
+            return res.status(200).json(orderGenre);
         }
     }
     catch (err) {
-        res.status(501).send('Error' + err);
+        res.status(500).send('Error' + err);
     }
 })
 
@@ -171,10 +171,10 @@ app.get('/directors/:name', passport.authenticate('jwt', {session: false}), asyn
                     Release: movie.Release
                 }))
             }
-            res.status(201).json(orderDirector)
+            res.status(200).json(orderDirector)
             }}
     catch (err) {
-        res.status(501).send('Error' + err);
+        res.status(500).send('Error' + err);
     }
 });
 
@@ -196,25 +196,14 @@ app.get('/actors/:name', passport.authenticate('jwt', {session: false}), async (
                         Release: movie.Release
                     }))
                 }
-                return res.status(201).json(orderActor);
+                return res.status(200).json(orderActor);
                 }}
     catch(err) {
-        res.status(501).send('Error' + err);
+        res.status(500).send('Error' + err);
     }
 })
 
 // === USER ROUTES ===
-
-// GET a list of all users
-app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    try {
-        const user = await Users.find()
-            res.status(201).json(user)
-    }
-    catch (err) {
-        res.status(501).send('Error' + err);
-    }
-})
 
 // CREATE new user
 app.post('/users', async (req, res) => {
@@ -281,7 +270,7 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         const userName = new RegExp(`^${req.params.username}$`, 'i');
         const user = await Users.findOne({Username: userName});
         if (!user) {
-                return res.status(400).send('User not found');
+                return res.status(404).send('User not found');
             }
         
         // perform the update
@@ -293,7 +282,7 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
                 Birthday: req.body.Birthday,
                 City: req.body.City
             }},{ new: true }); 
-            return res.status(200).json({
+            return res.status(201).json({
                 Message: "User updated successfully",
                 User: updatedUser
             });
@@ -310,7 +299,7 @@ app.delete('/users/:username', passport.authenticate('jwt', {session: false}), a
 
     // validate user
     if(req.user.Username !== req.params.username){
-        return res.status(400).send('Permission denied');
+        return res.status(401).send('Permission denied');
     }
 
     try {
@@ -324,7 +313,7 @@ app.delete('/users/:username', passport.authenticate('jwt', {session: false}), a
         }
     }
     catch (err) {
-            res.status(501).send('Error' + err);
+            res.status(500).send('Error' + err);
         }
 });
 
@@ -333,7 +322,7 @@ app.post('/users/:username/favorites/:movie', passport.authenticate('jwt', {sess
 
     // validate user
     if(req.user.Username !== req.params.username){
-        return res.status(400).send('Permission denied');
+        return res.status(401).send('Permission denied');
     }
 
     try {
@@ -342,14 +331,14 @@ app.post('/users/:username/favorites/:movie', passport.authenticate('jwt', {sess
         const userName = new RegExp(`^${req.params.username}$`, 'i');
         const user = await Users.findOne({Username: userName});
         if (!user) {
-            return res.status(400).send('User not found');
+            return res.status(404).send('User not found');
         }
         
         // validate that movie exist and is not alerady in the list
         const movieName = new RegExp(`^${req.params.movie}$`, 'i');
         const movie = await Movies.findOne({Title: movieName});
         if (!movie) {
-            return res.status(400).send('Movie not found');
+            return res.status(404).send('Movie not found');
         }
         else if (user.FavoriteMovies.includes(movie.id)) {
             return res.status(400).send('Movie already in the list'); 
@@ -373,7 +362,7 @@ app.delete('/users/:username/favorites/:movie', passport.authenticate('jwt', {se
 
     // validate user
     if(req.user.Username !== req.params.username){
-        return res.status(400).send('Permission denied');
+        return res.status(401).send('Permission denied');
     }
 
     try {
@@ -382,14 +371,14 @@ app.delete('/users/:username/favorites/:movie', passport.authenticate('jwt', {se
         const userName = new RegExp(`^${req.params.username}$`, 'i');
         const user = await Users.findOne({Username: userName});
         if (!user) {
-            return res.status(400).send('User not found');
+            return res.status(404).send('User not found');
         }
 
         // validate that movie exist and is not in the list
         const movieName = new RegExp(`^${req.params.movie}$`, 'i');
         const movie = await Movies.findOne({Title: movieName});
         if (!movie) {
-            return res.status(400).send('Movie not found');
+            return res.status(404).send('Movie not found');
         }
         else if (!user.FavoriteMovies.includes(movie.id)) {
             return res.status(400).send('Movie not in the list'); 
@@ -413,7 +402,7 @@ app.post('/users/:username/towatch/:movie', passport.authenticate('jwt', {sessio
 
     // validate user
     if(req.user.Username !== req.params.username){
-        return res.status(400).send('Permission denied');
+        return res.status(401).send('Permission denied');
     }
 
     try {
@@ -422,14 +411,14 @@ app.post('/users/:username/towatch/:movie', passport.authenticate('jwt', {sessio
         const userName = new RegExp(`^${req.params.username}$`, 'i');
         const user = await Users.findOne({Username: userName});
         if (!user) {
-            return res.status(400).send('User not found');
+            return res.status(404).send('User not found');
         }
         
         // validate that movie exist and is not alerady in the list
         const movieName = new RegExp(`^${req.params.movie}$`, 'i');
         const movie = await Movies.findOne({Title: movieName});
         if (!movie) {
-            return res.status(400).send('Movie not found');
+            return res.status(404).send('Movie not found');
         }
         else if (user.FavoriteMovies.includes(movie.id)) {
             return res.status(400).send('Movie already in the list'); 
@@ -453,7 +442,7 @@ app.delete('/users/:username/towatch/:movie', passport.authenticate('jwt', {sess
 
     // validate user
     if(req.user.Username !== req.params.username){
-        return res.status(400).send('Permission denied');
+        return res.status(401).send('Permission denied');
     }
 
     try {
@@ -462,14 +451,14 @@ app.delete('/users/:username/towatch/:movie', passport.authenticate('jwt', {sess
         const userName = new RegExp(`^${req.params.username}$`, 'i');
         const user = await Users.findOne({Username: userName});
         if (!user) {
-            return res.status(400).send('User not found');
+            return res.status(404).send('User not found');
         }
 
         // validate that movie exist and is not in the list
         const movieName = new RegExp(`^${req.params.movie}$`, 'i');
         const movie = await Movies.findOne({Title: movieName});
         if (!movie) {
-            return res.status(400).send('Movie not found');
+            return res.status(404).send('Movie not found');
         }
         else if (!user.FavoriteMovies.includes(movie.id)) {
             return res.status(400).send('Movie not in the list'); 
