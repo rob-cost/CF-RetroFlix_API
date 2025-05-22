@@ -42,11 +42,11 @@ Users can register, update profiles, add movies to favorites or watch lists, and
 
 ---
 
-## Authentication
+## Authentication & Security
 
 - The API uses **JWT (JSON Web Tokens)** and **HTTP** authentication.  
-- Users authenticate via JWT tokens (Bearer tokens).  
-- Passport.js handles authentication and protects routes requiring authorized access.
+- Password hashing.  
+- Validation of User inputs through **Joi** schemas.
 
 ---
 
