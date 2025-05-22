@@ -304,13 +304,12 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
             const hashedPassword = Users.hashPassword(req.body.Password);
             updateFields.Password = hashedPassword;
         }
+
+        const userName = new RegExp(`^${req.body.Username}$`, 'i');
+        if (userName === Users.Username) {
+            return res.status(400).send('Username already taken');
+        }
         
-        // validate that user exist
-        const userName = new RegExp(`^${req.params.username}$`, 'i');
-        const user = await Users.findOne({Username: userName});
-        if (!user) {
-                return res.status(404).send('User not found');
-            }
         
         // perform the update
         const updatedUser = await Users.findOneAndUpdate({ Username: userName },
