@@ -253,19 +253,31 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
 
     // validate user
     if(req.user.Username !== req.params.username){
-        return res.status(400).send('Permission denied');
+        return res.status(401).send('Permission denied');
     }
 
     try {
 
         // validate body 
-        const {error, value} = schema.validate(req.body);
+        const {error, value} = schema.validate(req.body, {allowUnknown:true, abortEarly:false}) ;
         if (error) {
             return res.status(400).json({
                 message: error.details[0].message
             })
         }
 
+        const updateFields = {};
+        if (req.body.Username) updateFields = req.body.Username;
+        if (req.body.Password) updateFields = req.body.Password;
+        if (req.body.Email) updateFields = req.body.Email;
+        if (req.body.Birthday) updateFields = req.body.Birthday;
+        if (req.body.City) updateFields = req.body.City;
+
+        if (req.body.Password) {
+            const hashedPassword = Users.hashPassword(req.body.Password);
+            updateFields.Password = hashedPassword;
+        }
+        
         // validate that user exist
         const userName = new RegExp(`^${req.params.username}$`, 'i');
         const user = await Users.findOne({Username: userName});
@@ -274,14 +286,9 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
             }
         
         // perform the update
-        const updatedUser = await Users.findOneAndUpdate({ Username: userName }, { $set:
-            {
-                Username: req.body.Username,
-                Password: hashedPassword,
-                Email: req.body.Email,
-                Birthday: req.body.Birthday,
-                City: req.body.City
-            }},{ new: true }); 
+        const updatedUser = await Users.findOneAndUpdate({ Username: userName },
+            { $set: updateFields },
+            { new: true }); 
             return res.status(201).json({
                 Message: "User updated successfully",
                 User: updatedUser
