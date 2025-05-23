@@ -64,15 +64,15 @@ Users can register, update profiles, add movies to favorites or watch lists, and
 
 ### User-related Endpoints
 
-| Endpoint                                  | Method | Description                             |
-|-------------------------------------------|--------|---------------------------------------|
-| `/users`                                  | POST   | Register a new user                   |
-| `/users/:username`                        | PUT    | Update user info                      |
-| `/users/:username`                        | DELETE | Delete a user                         |
-| `/users/:username/favorites/:movie`       | POST   | Add a movie to favorites              |
-| `/users/:username/favorites/:movie`       | DELETE | Remove a movie from favorites         |
-| `/users/:username/towatch/:movie`         | POST   | Add a movie to To Watch list          |
-| `/users/:username/towatch/:movie`         | DELETE | Remove a movie from To Watch list     |
+| Endpoint                                     | Method | Description                           |
+|----------------------------------------------|--------|---------------------------------------|
+| `/users`                                     | POST   | Register a new user                   |
+| `/users/:username`                           | PUT    | Update user info                      |
+| `/users/:username`                           | DELETE | Delete a user                         |
+| `/users/:username/favorites/:movie_id`       | POST   | Add a movie to favorites              |
+| `/users/:username/favorites/:movie_id`       | DELETE | Remove a movie from favorites         |
+| `/users/:username/towatch/:movie_id`         | POST   | Add a movie to To Watch list          |
+| `/users/:username/towatch/:movie_id`         | DELETE | Remove a movie from To Watch list     |
 
 ---
 
