@@ -5,9 +5,9 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-/* mongoose.connect('mongodb://localhost:27017/myFlixVintageDB', { useNewUrlParser: true, useUnifiedTopology: true }); */
+mongoose.connect('mongodb://localhost:27017/myFlixVintageDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+/* mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true }); */
 
 // request modules 
 const express = require('express'),
@@ -352,7 +352,7 @@ app.delete('/users/:username', passport.authenticate('jwt', {session: false}), a
 });
 
 // ADD movies to favorites list
-app.post('/users/:username/favorites/:movie', passport.authenticate('jwt', {session: false}), async (req,res) => {
+app.post('/users/:username/favorites/:movie_id', passport.authenticate('jwt', {session: false}), async (req,res) => {
 
     // validate user
     if(req.user.Username !== req.params.username){
@@ -369,8 +369,7 @@ app.post('/users/:username/favorites/:movie', passport.authenticate('jwt', {sess
         }
         
         // validate that movie exist and is not alerady in the list
-        const movieName = new RegExp(`^${req.params.movie}$`, 'i');
-        const movie = await Movies.findOne({Title: movieName});
+        const movie = await Movies.findOne({_id: req.params.movie_id});
         if (!movie) {
             return res.status(404).send('Movie not found');
         }
@@ -381,7 +380,7 @@ app.post('/users/:username/favorites/:movie', passport.authenticate('jwt', {sess
         const updatedUser = await Users.findOneAndUpdate({ Username: userName }, {$push: { FavoriteMovies: movie.id }},{ new: true });
         return res.json({
             Message: 'The movie has been added',
-            User: updatedUser
+            Data: updatedUser
         })
         
     }
@@ -392,7 +391,7 @@ app.post('/users/:username/favorites/:movie', passport.authenticate('jwt', {sess
 })
 
 // DELETE movies from favorites list
-app.delete('/users/:username/favorites/:movie', passport.authenticate('jwt', {session: false}), async (req, res) => {
+app.delete('/users/:username/favorites/:movie_id', passport.authenticate('jwt', {session: false}), async (req, res) => {
 
     // validate user
     if(req.user.Username !== req.params.username){
@@ -408,9 +407,8 @@ app.delete('/users/:username/favorites/:movie', passport.authenticate('jwt', {se
             return res.status(404).send('User not found');
         }
 
-        // validate that movie exist and is not in the list
-        const movieName = new RegExp(`^${req.params.movie}$`, 'i');
-        const movie = await Movies.findOne({Title: movieName});
+        // validate that movie exist and is not in the list 
+        const movie = await Movies.findOne({_id: req.params.movie_id});
         if (!movie) {
             return res.status(404).send('Movie not found');
         }
@@ -421,7 +419,7 @@ app.delete('/users/:username/favorites/:movie', passport.authenticate('jwt', {se
         const updatedUser = await Users.findOneAndUpdate({ Username: userName }, {$pull: { FavoriteMovies: movie.id }},{ new: true })
         return res.json({
                 Message: 'The movie has been removed',
-                User: updatedUser
+                Data: updatedUser
             });
         }
     catch(err)  {
@@ -432,7 +430,7 @@ app.delete('/users/:username/favorites/:movie', passport.authenticate('jwt', {se
 
 // ADD movies to ToWatch list
 
-app.post('/users/:username/towatch/:movie', passport.authenticate('jwt', {session: false}), async (req,res) => {
+app.post('/users/:username/towatch/:movie_id', passport.authenticate('jwt', {session: false}), async (req,res) => {
 
     // validate user
     if(req.user.Username !== req.params.username){
@@ -449,19 +447,18 @@ app.post('/users/:username/towatch/:movie', passport.authenticate('jwt', {sessio
         }
         
         // validate that movie exist and is not alerady in the list
-        const movieName = new RegExp(`^${req.params.movie}$`, 'i');
-        const movie = await Movies.findOne({Title: movieName});
+        const movie = await Movies.findOne({_id: req.params.movie_id});
         if (!movie) {
             return res.status(404).send('Movie not found');
         }
-        else if (user.FavoriteMovies.includes(movie.id)) {
+        else if (user.ToWatch.includes(movie.id)) {
             return res.status(400).send('Movie already in the list'); 
         }
     
         const updatedUser = await Users.findOneAndUpdate({ Username: userName }, {$push: { ToWatch: movie.id }},{ new: true });
         return res.json({
             Message: 'The movie has been added',
-            User: updatedUser
+            Data: updatedUser
         })
         
     }
@@ -472,7 +469,7 @@ app.post('/users/:username/towatch/:movie', passport.authenticate('jwt', {sessio
 })
 
 // DELETE movies from ToWatch list
-app.delete('/users/:username/towatch/:movie', passport.authenticate('jwt', {session: false}), async (req, res) => {
+app.delete('/users/:username/towatch/:movie_id', passport.authenticate('jwt', {session: false}), async (req, res) => {
 
     // validate user
     if(req.user.Username !== req.params.username){
@@ -489,19 +486,18 @@ app.delete('/users/:username/towatch/:movie', passport.authenticate('jwt', {sess
         }
 
         // validate that movie exist and is not in the list
-        const movieName = new RegExp(`^${req.params.movie}$`, 'i');
-        const movie = await Movies.findOne({Title: movieName});
+        const movie = await Movies.findOne({_id: req.params.movie_id});
         if (!movie) {
             return res.status(404).send('Movie not found');
         }
-        else if (!user.FavoriteMovies.includes(movie.id)) {
+        else if (!user.ToWatch.includes(movie.id)) {
             return res.status(400).send('Movie not in the list'); 
         }
 
         const updatedUser = await Users.findOneAndUpdate({ Username: userName }, {$pull: { ToWatch: movie.id }},{ new: true })
         return res.json({
                 Message: 'The movie has been removed',
-                User: updatedUser
+                Data: updatedUser
             });
         }
     catch(err)  {
@@ -516,15 +512,15 @@ app.delete('/users/:username/towatch/:movie', passport.authenticate('jwt', {sess
 // error handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(404).send('URL not found');
 })
 
 // listen for request
-const port = process.env.PORT || 8080;
+/* const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
-});
-
-/* app.listen(8080, () => {
-    console.log('Your app is listening on ort 8080.');
 }); */
+
+app.listen(8080, () => {
+    console.log('Your app is listening on ort 8080.');
+});
