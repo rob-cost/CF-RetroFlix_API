@@ -240,19 +240,22 @@ app.post('/users', async (req, res) => {
         if (error) {
             const errorMessage = error.details.map(details => details.message)
             return res.status(400).json({
-                message:'The following fields are required: ' + errorMessage
+                message: errorMessage
             })
         };
-        
 
         // ecnrypt password
         let hashedPassword = Users.hashPassword(req.body.Password);
 
         // validate there is no user with the same username
         const userName = new RegExp(`^${req.body.Username}$`, 'i');
+        const checkEmail = await Users.findOne({Email: req.body.Email})
         const user = await Users.findOne({ Username: userName });
             if (user) {
                 return res.status(400).send(req.body.Username + ' already exists');
+            }
+            if (checkEmail) {
+                return res.status(400).send('Email already exist');
             }
             
             else {
