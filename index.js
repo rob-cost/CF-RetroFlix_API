@@ -233,22 +233,24 @@ app.get('/actors/:name', passport.authenticate('jwt', {session: false}), async (
 // CREATE new user
 app.post('/users', async (req, res) => {
 
-    // ecnrypt password
-    let hashedPassword = Users.hashPassword(req.body.Password);
-
     try {
 
         // validate user request
-        const userName = new RegExp(`^${req.body.Username}$`, 'i');
-        const {error, value} = createUserSchema.validate(req.body);
+        const {error, value} = createUserSchema.validate(req.body, {abortEarly: false});
         if (error) {
+            const errorMessage = error.details.map(details => details.message)
             return res.status(400).json({
-                message: error.details[0].message
+                message:'The following fields are required: ' + errorMessage
             })
-        }
+        };
+        
 
+        // ecnrypt password
+        let hashedPassword = Users.hashPassword(req.body.Password);
+
+        // validate there is no user with the same username
+        const userName = new RegExp(`^${req.body.Username}$`, 'i');
         const user = await Users.findOne({ Username: userName });
-            // validate there is no user with the same username
             if (user) {
                 return res.status(400).send(req.body.Username + ' already exists');
             }
@@ -318,9 +320,21 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         if (req.body.Birthday) updateFields.Birthday = req.body.Birthday;
         if (req.body.City) updateFields.City = req.body.City;
 
+        // don't allow to update Username
+        if (req.body.Username !== req.params.username){
+            return res.status(400).send('It is not possible to change your Username');
+        }
+
+        // encrypt new Password
         if (req.body.Password) {
             const hashedPassword = Users.hashPassword(req.body.Password);
             updateFields.Password = hashedPassword;
+        }
+
+        // validate that no other users have the same Email
+        const checkEmail = await Users.findOne({Email: req.body.Email})
+        if (checkEmail) {
+            return res.status(400).send('Email already exist');
         }
 
         // validate that no other users have that username
