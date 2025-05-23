@@ -5,9 +5,9 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/myFlixVintageDB', { useNewUrlParser: true, useUnifiedTopology: true });
+/* mongoose.connect('mongodb://localhost:27017/myFlixVintageDB', { useNewUrlParser: true, useUnifiedTopology: true }); */
 
-/* mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true }); */
+mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // request modules 
 const express = require('express'),
@@ -548,11 +548,11 @@ app.use((err, req, res, next) => {
 })
 
 // listen for request
-/* const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
-}); */
-
-app.listen(8080, () => {
-    console.log('Your app is listening on ort 8080.');
 });
+
+/* app.listen(8080, () => {
+    console.log('Your app is listening on ort 8080.');
+}); */
