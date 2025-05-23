@@ -282,7 +282,37 @@
 		</code></pre>
 		<br>
 
-		<h3> 7. Update user info </h3>
+		<h3> 7. Get infos about an user </h3>
+
+		<p>
+			<b>Url:</b> <code>/users/:username </code>
+		</p>
+		<p>
+			<b>Method:</b> GET
+		</p>
+		<p>
+			<b>Request data:</b> None
+		</p>
+		<p>
+			<b>Response data:</b> A JSON object containing info of a user.
+		</p>
+		<pre><code>
+			{
+    "_id": "6830342ca2d5f93168d41bbf",
+    "Username": "test001",
+    "Password": "$2b$10$MyVU91O3hhg031DcYP.KBe7.ts673HUNv4R/qz3tO4dYqZ8TsIJ9.",
+    "Email": "test001@gmail.com",
+    "Birthday": "2000-02-02T00:00:00.000Z",
+    "FavoriteMovies": [
+        "68235d99177da4e158d8537a"
+    ],
+    "ToWatch": [],
+    "__v": 0
+}
+		</code></pre>
+		<br>
+
+		<h3> 8. Update user info </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/</code>
@@ -329,7 +359,7 @@
 		</code></pre>
 		<br>
 
-		<h3> 8. Delete user </h3>
+		<h3> 9. Delete user </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username </code>
@@ -345,7 +375,7 @@
 		</p>
 		<br>
 
-		<h3> 9. Add movie to favorites list </h3>
+		<h3> 10. Add movie to favorites list </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/favorites/:movie_id</code>
@@ -384,7 +414,7 @@
 		</code></pre>
 		<br>
 
-		<h3> 10. Remove movie from favorites list </h3>
+		<h3> 11. Remove movie from favorites list </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/favorites/:movie_id</code>
@@ -422,7 +452,7 @@
 		<br>
 
 
-		<h3> 11. Add movie to To Watch list </h3>
+		<h3> 12. Add movie to To Watch list </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/towatch/:movie_id</code>
@@ -461,7 +491,7 @@
 		<br>
 
 
-		<h3> 12. Remove movie from To Watch list </h3>
+		<h3> 13. Remove movie from To Watch list </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/towatch/:movie_id</code>

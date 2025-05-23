@@ -274,6 +274,24 @@ app.post('/users', async (req, res) => {
         })
 
 
+// GET infos about a user
+app.get('/users/:username', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    
+    // validate user
+    if(req.user.Username.toLocaleLowerCase() !== req.params.username.toLocaleLowerCase()) {
+            return res.status(401).send('Permission denied');
+    }
+
+    try {
+        const userName = new RegExp(`^${req.params.username}$`, 'i')
+        const user = await Users.findOne({Username: userName});
+        return res.status(200).json(user);
+    }
+    catch (err) {
+        return res.status(500).send('Error' + err);
+    }
+});
+
 
 // UPDATE user infos by username 
 app.put('/users/:username', passport.authenticate('jwt', {session: false}), async (req, res) => {
