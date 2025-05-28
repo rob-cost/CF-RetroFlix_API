@@ -30,11 +30,16 @@
 		<h2> Information </h2>
 		<p> The myFlixVintage Movie API is the server component of a full-stack Java-Script web application
 			that provides access to a vintage-movie database.
-			Built with the MERN stack (MongoDB, Express, React, Node.js), this API stores informations of different
+			Built with the MERN stack (MongoDB, Express, React, Node.js), this API stores information of different
 			movies, actors and directors together with users details and their preferences.
 			The REST API will be accesed using common HTTP methods like GET and POST while (CRUD) will be used to
 			retrieve data from the database and store that data
 			in a non-relational way.
+		</p>
+		<p>
+			Authorization is handled using a JSON Web Token (JWT). Once a user successfully logs in, the server 
+			generates a JWT, which is then returned to the client. This token must be included in the Authorization 
+			header of subsequent requests to authenticate the user and grant access to protected resources.
 		</p>
 
 		<h1>API Endpoints</h1>
@@ -53,7 +58,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON array holding a list of all movies with their info.
+			<b>Response data:</b> A JSON array holding a list of all movies with their information.
 		</p>
 		<pre><code>
 [
@@ -109,7 +114,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object holding info of a specific movie.
+			<b>Response data:</b> A JSON object holding information of a specific movie.
 		</p>
 		<pre><code>
 {
@@ -162,7 +167,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object containing info of a secific genre.
+			<b>Response data:</b> A JSON object containing information of a secific genre.
 		</p>
 		<pre><code>
 {
@@ -173,7 +178,7 @@
 
 		<br>
 
-		<h3> 4. Get infos about a director </h3>
+		<h3> 4. Get information about a director </h3>
 
 		<p>
 			<b>Url:</b> <code>/directors/:name </code>
@@ -185,7 +190,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object containing info of a specific director.
+			<b>Response data:</b> A JSON object containing information of a specific director.
 		</p>
 		<pre><code>
 {
@@ -208,7 +213,7 @@
 
 		<br>
 
-		<h3> 5. Get infos about an actor </h3>
+		<h3> 5. Get information about an actor </h3>
 
 		<p>
 			<b>Url:</b> <code>/actors/:name </code>
@@ -220,7 +225,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object containing info of a specific actor.
+			<b>Response data:</b> A JSON object containing information of a specific actor.
 		</p>
 		<pre><code>
 {
@@ -265,12 +270,12 @@
 }
 		</code></pre>
 		<p>
-			<b>Response data:</b> A JSON object containing the User info.
+			<b>Response data:</b> A JSON object containing the User information.
 		</p>
 		<pre><code>
 {
 	"Username": "User123",
-	"Password": "Passw123",
+	"Password": "$2b$10$zuhSTppuEAHVewiK9EToW.JDF/8Vv2B/gpAqDvZGu32X3ZBuob2Nm",
 	"Email": "user123@gmail.com",
 	"Birthday": "1990-04-25T00:00:00.000Z",
 	"City": "Berlin",
@@ -282,7 +287,39 @@
 		</code></pre>
 		<br>
 
-		<h3> 7. Get infos about an user </h3>
+		<h3> 7. Login a new user </h3>
+
+		<p>
+			<b>Url:</b> <code>/login</code>
+		</p>
+		<p>
+			<b>Method:</b> POST
+		</p>
+		<p>
+			<b>Request data:</b> 
+		</p>
+		<p>
+			<b>Response data:</b> A JSON object containing the User information with a token. The token will be used for authorization (Bearer Token)
+		</p>
+		<pre><code>
+{
+    "User": {
+        "_id": "6836b4ff8d505567d70471d0",
+        "Username": "User2567",
+        "Password": "$2b$10$zuhSTppuEAHVewiK9EToW.JDF/8Vv2B/gpAqDvZGu32X3ZBuob2Nm",
+        "Email": "us1234@gmail.com",
+        "Birthday": "1990-04-25T00:00:00.000Z",
+        "City": "Berlin",
+        "FavoriteMovies": [],
+        "ToWatch": [],
+        "__v": 0
+    },
+    "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODM2YjRmZjhkNTA1NTY3ZDcwNDcxZDAiLCJVc2VybmFtZSI6IlVzZXIyNTY3IiwiUGFzc3dvcmQiOiIkMmIkMTAkenVoU1RwcHVFQUhWZXdpSzlFVG9XLkpERi84VnYyQi9ncEFxRHZaR3UzMlgzWkJ1b2IyTm0iLCJFbWFpbCI6InVzMTIzNEBnbWFpbC5jb20iLCJCaXJ0aGRheSI6IjE5OTAtMDQtMjVUMDA6MDA6MDAuMDAwWiIsIkNpdHkiOiJCZXJsaW4iLCJGYXZvcml0ZU1vdmllcyI6W10sIlRvV2F0Y2giOltdLCJfX3YiOjAsImlhdCI6MTc0ODQxNTc3NiwiZXhwIjoxNzQ5MDIwNTc2LCJzdWIiOiJVc2VyMjU2NyJ9.TGq5iPyEGZf8UOn3UH7zyTcdCWj8AiZADF3-tNaX8D0"
+}
+		</code></pre>
+		<br>
+
+		<h3> 8. Get information about an user </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username </code>
@@ -294,7 +331,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object containing info of a user.
+			<b>Response data:</b> A JSON object containing information of a user.
 		</p>
 		<pre><code>
 			{
@@ -312,7 +349,7 @@
 		</code></pre>
 		<br>
 
-		<h3> 8. Update user info </h3>
+		<h3> 9. Update user information</h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/</code>
@@ -333,7 +370,7 @@
 }
 		</code></pre>
 		<p>
-			<b>Response data:</b> A JSON object containing the new user infos.
+			<b>Response data:</b> A JSON object containing the new user information.
 		</p>
 		<pre><code>
 {
@@ -341,7 +378,7 @@
 "user": {
 	"_id": "68243dbad838410c3ffecfcf",
 	"Username": "Robs3",
-	"Password": "Userpaword",
+	"Password": "$2b$10$MyVU91O3hhg031DcYP.KBe7.ts673HUNv4R/qz3tO4dYqZ8TsIJ9",
 	"Email": "robs@gmail.com",
 	"Birthdate": "1983-11-07T00:00:00.000Z",
 	"City": "Berlin",
@@ -359,7 +396,7 @@
 		</code></pre>
 		<br>
 
-		<h3> 9. Delete user </h3>
+		<h3> 10. Delete user </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username </code>
@@ -375,7 +412,7 @@
 		</p>
 		<br>
 
-		<h3> 10. Add movie to favorites list </h3>
+		<h3> 11. Add movie to favorites list </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/favorites/:movie_id</code>
@@ -387,7 +424,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object with the user info updated.
+			<b>Response data:</b> A JSON object with the user information updated.
 		</p>
 		<pre><code>
 {
@@ -395,7 +432,7 @@
 "User": {
 	"_id": "68243dbad838410c3ffecfcf",
 	"Username": "Robs3",
-	"Password": "Userpaword",
+	"Password": "$2b$10$MyVU91O3hhg031DcYP.KBe7.ts673HUNv4R/qz3tO4dYqZ8TsIJ9",
 	"Email": "robs@gmail.com",
 	"Birthdate": "1983-11-07T00:00:00.000Z",
 	"City": "Berlin",
@@ -414,7 +451,7 @@
 		</code></pre>
 		<br>
 
-		<h3> 11. Remove movie from favorites list </h3>
+		<h3> 12. Remove movie from favorites list </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/favorites/:movie_id</code>
@@ -426,7 +463,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object with the user info updated
+			<b>Response data:</b> A JSON object with the user information updated
 		</p>
 		<pre><code>
 {
@@ -434,7 +471,7 @@
 "User": {
 	"_id": "68243dbad838410c3ffecfcf",
 	"Username": "Robs3",
-	"Password": "Userpaword",
+	"Password": "$2b$10$MyVU91O3hhg031DcYP.KBe7.ts673HUNv4R/qz3tO4dYqZ8TsIJ9",
 	"Email": "robs@gmail.com",
 	"Birthdate": "1983-11-07T00:00:00.000Z",
 	"City": "Berlin",
@@ -452,7 +489,7 @@
 		<br>
 
 
-		<h3> 12. Add movie to To Watch list </h3>
+		<h3> 13. Add movie to To Watch list </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/towatch/:movie_id</code>
@@ -464,7 +501,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object with the user info updated.
+			<b>Response data:</b> A JSON object with the user information updated.
 		</p>
 		<pre><code>
 {
@@ -472,7 +509,7 @@
 "User": {
 	"_id": "68243dbad838410c3ffecfcf",
 	"Username": "Robs3",
-	"Password": "Userpaword",
+	"Password": "$2b$10$MyVU91O3hhg031DcYP.KBe7.ts673HUNv4R/qz3tO4dYqZ8TsIJ9",
 	"Email": "robs@gmail.com",
 	"Birthdate": "1983-11-07T00:00:00.000Z",
 	"City": "Berlin",
@@ -491,7 +528,7 @@
 		<br>
 
 
-		<h3> 13. Remove movie from To Watch list </h3>
+		<h3> 14. Remove movie from To Watch list </h3>
 
 		<p>
 			<b>Url:</b> <code>/users/:username/towatch/:movie_id</code>
@@ -503,7 +540,7 @@
 			<b>Request data:</b> None
 		</p>
 		<p>
-			<b>Response data:</b> A JSON object with the user info updated.
+			<b>Response data:</b> A JSON object with the user information updated.
 		</p>
 		<pre><code>
 {
@@ -511,7 +548,7 @@
 "User": {
 	"_id": "68243dbad838410c3ffecfcf",
 	"Username": "Robs3",
-	"Password": "Userpaword",
+	"Password": "$2b$10$MyVU91O3hhg031DcYP.KBe7.ts673HUNv4R/qz3tO4dYqZ8TsIJ9",
 	"Email": "robs@gmail.com",
 	"Birthdate": "1983-11-07T00:00:00.000Z",
 	"City": "Berlin",
