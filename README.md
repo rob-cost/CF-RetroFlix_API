@@ -67,6 +67,7 @@ Users can register, update profiles, add movies to favorites or watch lists, and
 | Endpoint                                     | Method | Description                           |
 |----------------------------------------------|--------|---------------------------------------|
 | `/users`                                     | POST   | Register a new user                   |
+| `/login`                                     | POST   | Login as a user                       |
 | `/users/:username`                           | GET    | Get user info                         |
 | `/users/:username`                           | PUT    | Update user info                      |
 | `/users/:username`                           | DELETE | Delete a user                         |
