@@ -17,7 +17,7 @@ Users can also manage their profiles and maintain a personalized list of favorit
 ## Project Overview
 
 The myFlix API serves movie, actor, director, genre, and user information with full CRUD support.  
-Users can register, update profiles, add movies to favorites or watch lists, and retrieve movie details via the API.
+Users can register, update profiles, add movies to favorites or watch lists, and retrieve movie details via the API. 
 API URL: https://my-vintage-flix-06cde8de3bcb.herokuapp.com/
 
 ---
