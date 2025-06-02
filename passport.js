@@ -46,6 +46,9 @@ passport.use (
     )
 )
 
+const user = await.findOne({Username: username});
+console.log('Mongo user found: ' + user);
+
 passport.use (
     new JWTStrategy (
         {
