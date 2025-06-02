@@ -101,7 +101,7 @@ const updateUserSchema = joi.object({
 // === MOVIE ROUTES ===
 
 // GET a list of all movies
-app.get('/movies', async (req, res) => {
+app.get('/movies', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const movie = await Movies.find()
         const orderMovies = movie.map(movie => ({
