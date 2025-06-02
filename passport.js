@@ -15,30 +15,36 @@ passport.use (
         },
         async (username, password, callback) => {
             console.log (`${username} ${password}`);
-            await Users.findOne({Username: username})
-            .then ((user) => {
+            try {
+            const user = await Users.findOne({Username: username})
+
+            console.log("User found:" + user);
+
                 if (!user) {
                     console.log (`Incorrect username`);
                     return callback (null, false, {
                         message: 'Incorrect username or password.',
                     });
                 }
-                if (!user.validatePassword(password)) {
+                const isValid = await user.validatePassword(password);
+
+                console.log("Password match result: " + isValid)
+
+                if (!isValid) {
                     console.log('Incorrect password');
                     return callback(null, false, {message: 'Incorrect password'});
                 }
                 console.log('Finished');
                 return callback (null, user);
-            })
-            .catch ((error) => {
-                if (error) {
+            }
+            catch (error) {
                     console.log(error);
                     return callback (error);
                 }
             })
-        }
+        
     )
-)
+
 
 passport.use (
     new JWTStrategy (
