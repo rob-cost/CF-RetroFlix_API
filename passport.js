@@ -16,7 +16,8 @@ passport.use (
         async (username, password, callback) => {
             console.log (`${username} ${password}`);
             try {
-            const user = await Users.findOne({Username: username})
+            const userName = new RegExp(`^${username}$`, 'i');
+            const user = await Users.findOne({Username: userName})
 
             console.log("User found:" + user);
 
