@@ -335,16 +335,16 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         }
 
         // validate that no other users have the same Email
-        const checkEmail = await Users.findOne({Email: req.body.Email})
-        if (checkEmail) {
-            return res.status(400).send('Email already exist');
-        }
+        // const checkEmail = await Users.findOne({Email: req.body.Email})
+        // if (checkEmail) {
+        //     return res.status(400).send('Email already exist');
+        // }
 
         // validate that no other users have that username
-        const checkName = await Users.findOne({Username: updateFields.Username });
-        if (checkName && checkName!==updateFields.Username) {
-            return res.status(400).send('Username already taken');
-        }
+        // const checkName = await Users.findOne({Username: updateFields.Username });
+        // if (checkName && checkName!==updateFields.Username) {
+        //     return res.status(400).send('Username already taken');
+        // }
  
         // perform the update
         const userName = new RegExp(`^${req.params.username}$`, 'i');
@@ -359,7 +359,7 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
     catch(err) {
         console.error(err);
         res.status(500).send('Error: ' + err);
-        }
+    }
 
 });
 
