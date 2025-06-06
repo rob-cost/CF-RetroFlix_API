@@ -342,7 +342,7 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
 
         // validate that no other users have that username
         const checkName = await Users.findOne({Username: updateFields.Username });
-        if (checkName && checkName!==Username) {
+        if (checkName && checkName!==updateFields.Username) {
             return res.status(400).send('Username already taken');
         }
  
