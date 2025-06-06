@@ -324,9 +324,9 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         if (req.body.City) updateFields.City = req.body.City;
 
         // don't allow to update Username
-        if (req.body.Username !== req.params.username){
+/*         if (req.body.Username !== req.params.username){
             return res.status(400).send('It is not possible to change your Username');
-        }
+        } */
 
         // encrypt new Password
         if (req.body.Password) {
