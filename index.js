@@ -300,6 +300,7 @@ app.get('/users/:username', passport.authenticate('jwt', {session: false}), asyn
 
 // UPDATE user infos by username 
 app.put('/users/:username', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    console.log("Am I here!!!")
 
     // validate user
     if(req.user.Username.toLowerCase() !== req.params.username.toLocaleLowerCase()){
@@ -347,6 +348,7 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         // }
  
         // perform the update
+        console.log(updateFields);
         const userName = new RegExp(`^${req.params.username}$`, 'i');
         const updatedUser = await Users.findOneAndUpdate({ Username: userName },
             { $set: updateFields },
@@ -358,6 +360,20 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), asyn
         }
     catch(err) {
         console.error(err);
+        if (err.code == 11000) {
+            const duplicatedError = Object.keys(err.keyPattern)[0];
+
+            if (duplicatedError == 'Username') {
+            return res.status(400).json({
+                message:'Username already exists!',  
+            })};
+
+            if (duplicatedError == 'Email') {
+            return res.status(400).json({
+                message:'Email already exists!',  
+            })}
+
+        }
         res.status(500).send('Error: ' + err);
     }
 
