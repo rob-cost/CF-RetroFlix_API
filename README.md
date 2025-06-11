@@ -1,5 +1,5 @@
-# myFlixVintage Movie API
-This API powers the back-end of myFlixVintage movie application. It allows users to access detailed information about vintage movies, genres, and directors to enhance their movie knowledge.
+# RetroFlix Movie API
+This API powers the back-end of RetroFlix movie application. It allows users to access detailed information about vintage movies, genres, and directors to enhance their movie knowledge.
 Users can also manage their profiles and maintain a personalized list of favorite movies. This API is useful both for movie enthusiasts who want to explore film data and for front-end developers building the client-side of the application.
 
 ---
@@ -16,7 +16,7 @@ Users can also manage their profiles and maintain a personalized list of favorit
 
 ## Project Overview
 
-The myFlix API serves movie, actor, director, genre, and user information with full CRUD support.  
+The RetroFlix API serves movie, actor, director, genre, and user information with full CRUD support.  
 Users can register, update profiles, add movies to favorites or watch lists, and retrieve movie details via the API. 
 API URL: https://my-vintage-flix-06cde8de3bcb.herokuapp.com/
 
