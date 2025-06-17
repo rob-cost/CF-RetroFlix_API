@@ -26,10 +26,9 @@ module.exports = (router) => {
                 if (error) {
                     res.send(error);
                 }
-                // delete the password
-                delete User.Password;
                 let Token = generateJWTToken(User.toJSON());
-                return res.json({User, Token});
+                let userInfo = [User.Username, User.Birthday, User.City, User.Email, User.FavoriteMovies, User.ToWatch]
+                return res.json({userInfo, Token});
             });
         })(req, res);
     });
