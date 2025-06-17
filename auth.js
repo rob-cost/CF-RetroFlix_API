@@ -26,14 +26,9 @@ module.exports = (router) => {
                 if (error) {
                     res.send(error);
                 }
-                let userInfo = {
-                    username: User.Username,
-                    email: User.Email,
-                    city: User.City
-
-                }
                 let Token = generateJWTToken(User.toJSON());
-                return res.json({User, Token});
+                let text = 'it is me'
+                return res.json({User, Token, text});
             });
         })(req, res);
     });
