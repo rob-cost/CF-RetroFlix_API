@@ -7,7 +7,7 @@ require("./passport");
 
 // generate token
 
-let generateJWTToken = (user) => {
+let generateJWTToken = user => {
   return jwt.sign(user, jwtSecret, {
     subject: user.Username,
     expiresIn: "7d",
@@ -15,7 +15,7 @@ let generateJWTToken = (user) => {
   });
 };
 
-module.exports = (router) => {
+module.exports = router => {
   router.post("/login", (req, res) => {
     passport.authenticate("local", { session: false }, (error, User, info) => {
       if (error || !User) {
@@ -24,7 +24,7 @@ module.exports = (router) => {
           User: User,
         });
       }
-      req.login(User, { session: false }, (error) => {
+      req.login(User, { session: false }, error => {
         if (error) {
           res.send(error);
         }

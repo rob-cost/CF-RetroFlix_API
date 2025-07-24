@@ -102,14 +102,10 @@
 
         
                 
-<h4 class="name" id="CreateUserSchema">CreateUserSchema</h4>
+<h4 class="name" id="Actor">Actor</h4>
 
 
 
-
-<div class="description">
-    Joi validation schema for user registration
-</div>
 
 
 
@@ -153,7 +149,7 @@
 
         <tr>
             
-                <td class="name"><code>Username</code></td>
+                <td class="name"><code>Name</code></td>
             
 
             <td class="type">
@@ -169,14 +165,14 @@
 
             
 
-            <td class="description last">Alphanumeric username, 3-30 characters (required)</td>
+            <td class="description last">The actor's full name</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>Password</code></td>
+                <td class="name"><code>Bio</code></td>
             
 
             <td class="type">
@@ -192,76 +188,7 @@
 
             
 
-            <td class="description last">Alphanumeric password, 3-30 characters (required)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>Email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Valid email address with minimum 2 domain segments (required)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>Birthday</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Date</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Birth date between 1920-2025 in ISO format (required)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>City</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Alphanumeric city name, 3-30 characters (optional)</td>
+            <td class="description last">Biography of the actor</td>
         </tr>
 
     
@@ -300,7 +227,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line67">line 67</a>
+        <a href="models.js.html">models.js</a>, <a href="models.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -318,13 +245,630 @@
 
             
                 
-<h4 class="name" id="UpdateUserSchema">UpdateUserSchema</h4>
+<h4 class="name" id="Director">Director</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The director's full name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Bio</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Biography of the director</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Birth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Birth date of the director</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Death</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Death date of the director (if applicable)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models.js.html">models.js</a>, <a href="models.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="Genre">Genre</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the genre</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Description</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Description of the genre</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models.js.html">models.js</a>, <a href="models.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="MovieSchema">MovieSchema</h4>
 
 
 
 
 <div class="description">
-    Joi validation schema for user profile updates
+    Mongoose schema for movie documents
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The title of the movie (required)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Description</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A description of the movie (required)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Genre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Genre">Genre</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Genre information for the movie</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Release</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Release date of the movie</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Director</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Director">Director</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Director information</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Actors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#Actor">Actor</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of actors in the movie</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Rating</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Movie rating (e.g., PG, PG-13, R)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ImagePath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Path to the movie's poster image</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models.js.html">models.js</a>, <a href="models.js.html#line4">line 4</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="UserSchema">UserSchema</h4>
+
+
+
+
+<div class="description">
+    Mongoose schema for user documents
 </div>
 
 
@@ -385,7 +929,7 @@
 
             
 
-            <td class="description last">Alphanumeric username, 3-30 characters (optional)</td>
+            <td class="description last">Unique username for the user (required)</td>
         </tr>
 
     
@@ -408,7 +952,7 @@
 
             
 
-            <td class="description last">Password string (optional)</td>
+            <td class="description last">Hashed password for the user (required)</td>
         </tr>
 
     
@@ -431,7 +975,7 @@
 
             
 
-            <td class="description last">Valid email address with minimum 2 domain segments (optional)</td>
+            <td class="description last">Unique email address for the user (required)</td>
         </tr>
 
     
@@ -454,7 +998,7 @@
 
             
 
-            <td class="description last">Birth date between 1920-2025 in ISO format (optional)</td>
+            <td class="description last">User's birth date (required)</td>
         </tr>
 
     
@@ -477,7 +1021,53 @@
 
             
 
-            <td class="description last">Alphanumeric city name, 3-30 characters (optional)</td>
+            <td class="description last">User's city of residence</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>FavoriteMovies</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;mongoose.Schema.Types.ObjectId></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of movie IDs in user's favorites</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ToWatch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;mongoose.Schema.Types.ObjectId></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of movie IDs in user's watch list</td>
         </tr>
 
     
@@ -516,7 +1106,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line94">line 94</a>
+        <a href="models.js.html">models.js</a>, <a href="models.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -552,7 +1142,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Jul 24 2025 16:08:10 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Jul 24 2025 16:10:55 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
