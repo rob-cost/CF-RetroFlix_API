@@ -125,6 +125,7 @@ const updateUserSchema = joi.object({
  * @returns {Array<Object>} 200 - An array of movie objects
  * @returns {string} 500 - Server error
  */
+app.get("/", (req, res) => res.send("Docker is here"));
 
 app.get(
   "/movies",
