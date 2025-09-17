@@ -9,6 +9,7 @@ RUN npm install
 COPY . .    
 
 ENV PORT=8080
+ENV CONNECTION_URI=
 
 EXPOSE 8080
 
